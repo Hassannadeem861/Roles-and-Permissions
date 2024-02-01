@@ -1,13 +1,20 @@
 
 require('dotenv').config();
-const mysql = require('mysql2');
+const mysql = require('mysql');
 
 // MySQL connection details from environment variables
 const connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE
+    HOST: process.env.DB_HOST || 'localhost',
+    USER: process.env.DB_USER || 'root',
+    PASSWORD: process.env.DB_PASSWORD || '',
+    DB: process.env.DB_DATABASE || 'Hassan_Nadeem',
+    dialect: "mysql",
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000,
+    },
 });
 
 // Connection establish kare
